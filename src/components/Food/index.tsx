@@ -3,6 +3,7 @@ import { FiEdit3, FiTrash } from "react-icons/fi";
 
 import { Container } from "./styles";
 import api from "../../services/api";
+import { FoodEditData } from '../../pages/Dashboard/index'
 
 interface FoodProps {
   food: {
@@ -13,7 +14,7 @@ interface FoodProps {
     image: string;
     available: boolean;
   };
-  handleEditFood: (food: { id: number }) => void;
+  handleEditFood: (food: FoodEditData) => void;
   handleDelete: (id: number) => void;
 }
 
@@ -30,7 +31,12 @@ export function Food({ food, handleEditFood, handleDelete }: FoodProps) {
   };
 
   const setEditingFood = () => {
-    handleEditFood(food);
+    const updatedFood = {
+      ...food,
+      price: String(food.price),
+    }
+
+    handleEditFood(updatedFood);
   };
 
   return (
